@@ -1,30 +1,16 @@
 import React, { Fragment } from 'react'
-import { useQuery } from '@apollo/client'
-import GetTransactions from '../gql/transactions.gql'
-import { TxTable } from '../components/transactions/TxTable'
 
 export function Home () {
-  const { loading, error, data = {} } = useQuery(GetTransactions)
-
-  if (loading) {
-    return (
-      <Fragment>
-        Loading...
-      </Fragment>
-    )
-  }
-
-  if (error) {
-    return (
-      <Fragment>
-        ¯\_(ツ)_/¯
-      </Fragment>
-    )
-  }
-
   return (
     <Fragment>
-      <TxTable data={data.transactions} />
+      {/* make a card a reusable component */}
+      <div>TXs Card</div>
+      <div>Users Card</div>
+      <div>Merchants Card</div>
+      {/* make a pie chart reusable component */}
+      <div>TX Pie Chart</div>
+      <div>User Pie Chart</div>
+      <div>Merchants Pie Chart</div>
     </Fragment>
   )
 }
