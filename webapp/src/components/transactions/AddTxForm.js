@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { func } from 'prop-types'
 import { css } from '@emotion/core'
-import { Divider } from '../global/Divider'
 import { useMutation } from '@apollo/client'
-import AddTransaction from '../../gql/addTransaction.gql'
+import AddTransaction from '../../gql/transactions/addTransaction.gql'
+import { UserSelect } from '../../users'
+import { MerchantSelect } from '../../merchants'
+import { Button } from '../global/Button'
 
 export function AddTxForm ({ handleClose }) {
   const [ addTransaction, { loading, error } ] = useMutation(AddTransaction)
@@ -13,12 +15,9 @@ export function AddTxForm ({ handleClose }) {
     amount: '',
     debit: false,
     credit: true,
-    merchant_id: 'walmart',
-    user_id: 'employee4'
+    merchant_id: '',
+    user_id: ''
   })
-
-  console.log('credit', values.credit)
-  console.log('debit', values.debit)
 
   if (loading) return 'Submitting...'
   if (error) return `Submission error! ${error.message}`
@@ -33,9 +32,9 @@ export function AddTxForm ({ handleClose }) {
   const handleSubmit = () => {
     addTransaction({
       variables: {
-        user_id: 'employee5',
+        user_id: values.user_id,
         description: values.description,
-        merchant_id: 'cvs',
+        merchant_id: values.merchant_id,
         debit: false,
         credit: true,
         amount: parseFloat(values.amount)
@@ -46,30 +45,27 @@ export function AddTxForm ({ handleClose }) {
   }
   return (
     <form css={formStyle} onSubmit={handleSubmit}>
-      <p>Add Transaction</p>
-      <Divider />
       <label css={labelStyles}>
        Description
         <input css={inputStyle} name='description' onChange={handleChange} type='text' />
       </label>
       <label>
        Amount
-        <br />
-        <input name='amount' onChange={handleChange} type='text' />
+        <input css={inputStyle} name='amount' onChange={handleChange} type='text' />
       </label>
-      <label>
-        Debit
-        <br />
-        <input name='debit' onChange={handleChange} type='checkbox' />
-      </label>
-      <label>
-        Credit
-        <br />
-        <input name='credit' onChange={handleChange} type='checkbox' />
-      </label>
-      <button type='submit'>
-          Submit
-      </button>
+      <UserSelect onChange={handleChange} />
+      <MerchantSelect onChange={handleChange} />
+      <div css={checkbxDivStyle}>
+        <label>
+          Debit:
+          <input name='debit' onChange={handleChange} type='checkbox' />
+        </label>
+        <label>
+          Credit:
+          <input name='credit' onChange={handleChange} type='checkbox' />
+        </label>
+      </div>
+      <Button style='success' text='Submit' />
     </form>
   )
 }
@@ -91,6 +87,15 @@ const labelStyles = css`
 `
 
 const inputStyle = css`
-  padding: 1px;
-  width: auto;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+`
+const checkbxDivStyle = css`
+  display: flex;
+  justify-content: space-around;
 `

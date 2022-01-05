@@ -5,7 +5,28 @@ import { css } from '@emotion/core'
 const styles = css`
  .header {
    font-weight: bold;
- }
+   th {
+    padding: 12px 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+   },
+ },
+  table {
+    border-collapse: collapse;
+    width: 85%
+  },
+
+ td {
+  border: 1px solid #ddd;
+  padding: 8px;
+ },
+
+ tr {
+  &:nth-of-type(even) {
+    background-color: #f2f2f2;
+  }
+}
+
 `
 
 const makeDataTestId = (transactionId, fieldName) => `transaction-${transactionId}-${fieldName}`
@@ -16,13 +37,13 @@ export function TxTable ({ data }) {
     <table css={styles}>
       <tbody>
         <tr className='header'>
-          <td >ID</td>
-          <td >User ID</td>
-          <td >Description</td>
-          <td >Merchant ID</td>
-          <td >Debit</td>
-          <td >Credit</td>
-          <td >Amount</td>
+          <th >ID</th>
+          <th >User ID</th>
+          <th >Description</th>
+          <th >Merchant ID</th>
+          <th >Debit</th>
+          <th >Credit</th>
+          <th >Amount</th>
         </tr>
         {
           data.map(tx => {

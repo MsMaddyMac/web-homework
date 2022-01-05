@@ -1,0 +1,37 @@
+import React from 'react'
+import { string, element, array } from 'prop-types'
+import { css } from '@emotion/core'
+
+export function PageLayout ({ title, pageBtn, children }) {
+  return (
+    <div css={pageStyle}>
+      <div css={pageHeaderStyle}>
+        <h1>{title}</h1>
+        <div css={btnDivStyle}>{pageBtn}</div>
+      </div>
+      {/* <div css={childDivStyle}> */}
+      {children}
+      {/* </div> */}
+    </div>
+  )
+}
+
+PageLayout.propTypes = {
+  title: string,
+  pageBtn: element,
+  children: array
+}
+
+const pageStyle = css`
+  padding: 8px;
+`
+
+const pageHeaderStyle = css`
+  display: flex;
+  justify-content: space-between;
+`
+
+const btnDivStyle = css`
+  display: flex;
+  align-items: center;
+`

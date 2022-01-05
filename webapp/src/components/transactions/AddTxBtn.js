@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Button } from '../global/Button'
 import { Modal } from '../global/Modal'
 import { AddTxForm } from './AddTxForm'
 
@@ -15,10 +16,8 @@ export function AddTxBtn () {
 
   return (
     <div>
-      <button onClick={handleClickOpen}>
-        Add Transaction
-      </button>
-      <Modal handleClose={handleClose} show={show}>
+      <Button onClick={handleClickOpen} style={'primary'} text={'Add Transaction'} />
+      <Modal handleClose={handleClose} show={show} title={'Add Transaction'}>
         <AddTxForm handleClose={handleClose} />
       </Modal>
     </div>
