@@ -42,12 +42,3 @@ const linkStyle = css`
     background-color: #1a69b7;
   }
 `
-// to use ul and li again
-// grid-row: 1;
-//   & > ul {
-//       display: flex;
-//       flex-direction: row;
-//       list-style-type: none;
-//   }
-//   & > ul > li:not(:first-of-type) {
-//     margin-left: 16px;

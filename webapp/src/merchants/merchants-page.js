@@ -31,9 +31,6 @@ export function Merchants () {
   )
 }
 
-// add delete and edit icons to merchant cards
-// add a addMerchant btn
-
 const containerStyle = css`
   display: flex;
   flex-wrap: wrap;

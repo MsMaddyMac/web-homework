@@ -35,7 +35,7 @@ export function Button ({ style, onClick, text }) {
         background-color: ${color};
         color: white;
       }
-    `} onClick={onClick}>
+    `} data-testid='global-btn' onClick={onClick}>
       {text}
     </button>
   )

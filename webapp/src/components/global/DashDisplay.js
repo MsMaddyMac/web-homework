@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { string } from 'prop-types'
+import { number } from 'prop-types'
 import { css } from '@emotion/core'
 import { Card } from './Card'
 import { Button } from './Button'
@@ -35,15 +35,15 @@ export function DashDisplay ({ userCount, merchCount, txCount }) {
       <div css={cardBoxStyle}>
         <Card>
           <h3>Users</h3>
-          <p>{convertedNums.convertedUserCount}</p>
+          <p data-testid='user-count-to-roman'>{convertedNums.convertedUserCount}</p>
         </Card>
         <Card>
           <h3>Merchants</h3>
-          <p>{convertedNums.convertedMerchCount}</p>
+          <p data-testid='merch-count-to-roman'>{convertedNums.convertedMerchCount}</p>
         </Card>
         <Card>
           <h3>Transactions</h3>
-          <p>{convertedNums.convertedTxCount}</p>
+          <p data-testid='tx-count-to-roman'>{convertedNums.convertedTxCount}</p>
         </Card>
       </div>
       <div css={btnBoxStyle}>
@@ -54,9 +54,9 @@ export function DashDisplay ({ userCount, merchCount, txCount }) {
 }
 
 DashDisplay.propTypes = {
-  userCount: string,
-  merchCount: string,
-  txCount: string
+  userCount: number,
+  merchCount: number,
+  txCount: number
 }
 
 const cardBoxStyle = css`

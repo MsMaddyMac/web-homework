@@ -31,9 +31,6 @@ export function Users () {
   )
 }
 
-// add delete and edit icons to user cards
-// add a addUser btn
-
 const containerStyle = css`
   display: flex;
   flex-wrap: wrap;

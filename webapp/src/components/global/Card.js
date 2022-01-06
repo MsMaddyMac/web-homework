@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, string } from 'prop-types'
+import { any, string } from 'prop-types'
 import { css } from '@emotion/core'
 
 export function Card ({ children, size, name, src }) {
@@ -46,7 +46,7 @@ Card.propTypes = {
   name: string,
   src: string,
   size: string,
-  children: object
+  children: any
 }
 
 const containerStyle = css`

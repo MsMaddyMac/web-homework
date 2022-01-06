@@ -9,9 +9,7 @@ export function PageLayout ({ title, pageBtn, children }) {
         <h1>{title}</h1>
         <div css={btnDivStyle}>{pageBtn}</div>
       </div>
-      {/* <div css={childDivStyle}> */}
       {children}
-      {/* </div> */}
     </div>
   )
 }
