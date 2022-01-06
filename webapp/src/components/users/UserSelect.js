@@ -1,8 +1,8 @@
 import React from 'react'
 import { func } from 'prop-types'
 import { useQuery } from '@apollo/client'
-import GetUsers from '../gql/users/users.gql'
-import { Select } from '../components/global/Select'
+import GetUsers from '../../gql/users/users.gql'
+import { Select } from '../global/Select'
 
 export function UserSelect ({ onChange }) {
   const { data: { users } = {} } = useQuery(GetUsers)

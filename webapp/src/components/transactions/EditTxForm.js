@@ -1,22 +1,22 @@
 import React, { useState } from 'react'
-import { func } from 'prop-types'
+import { func, object } from 'prop-types'
 import { css } from '@emotion/core'
 import { useMutation } from '@apollo/client'
-import AddTransaction from '../../gql/transactions/addTransaction.gql'
+import EditTransaction from '../../gql/transactions/editTransaction.gql'
 import { UserSelect } from '../users/UserSelect'
 import { MerchantSelect } from '../merchants/MerchantSelect'
 import { Button } from '../global/Button'
 
-export function AddTxForm ({ handleClose }) {
-  const [ addTransaction, { loading, error } ] = useMutation(AddTransaction)
-
+export function EditTxForm ({ handleClose, transaction }) {
+  const [ updateTransaction, { loading, error } ] = useMutation(EditTransaction)
   const [values, setValues] = useState({
-    description: '',
-    amount: '',
-    debit: false,
-    credit: false,
-    merchant_id: '',
-    user_id: ''
+    id: transaction.id,
+    description: transaction.description,
+    amount: transaction.amount,
+    debit: transaction.debit,
+    credit: transaction.credit,
+    merchant_id: transaction.merchant_id,
+    user_id: transaction.user_id
   })
 
   if (loading) return 'Submitting...'
@@ -37,16 +37,17 @@ export function AddTxForm ({ handleClose }) {
   }
 
   const handleSubmit = () => {
-    addTransaction({
+    updateTransaction({
       variables: {
+        id: transaction.id,
         user_id: values.user_id,
         description: values.description,
         merchant_id: values.merchant_id,
-        debit: false,
-        credit: true,
+        debit: values.debit,
+        credit: values.credit,
         amount: parseFloat(values.amount)
       },
-      refetchQueries: ['GetTransactions']
+      refetchQueries: ['GetTransactions', 'GetTransaction']
     })
     handleClose()
   }
@@ -54,11 +55,23 @@ export function AddTxForm ({ handleClose }) {
     <form css={formStyle} onSubmit={handleSubmit}>
       <label css={labelStyles}>
        Description
-        <input css={inputStyle} name='description' onChange={handleChange} type='text' />
+        <input
+          css={inputStyle}
+          name='description'
+          onChange={handleChange}
+          placeholder={transaction.description}
+          type='text'
+        />
       </label>
       <label>
        Amount
-        <input css={inputStyle} name='amount' onChange={handleChange} type='text' />
+        <input
+          css={inputStyle}
+          name='amount'
+          onChange={handleChange}
+          placeholder={transaction.amount}
+          type='text'
+        />
       </label>
       <UserSelect onChange={handleChange} />
       <MerchantSelect onChange={handleChange} />
@@ -77,8 +90,9 @@ export function AddTxForm ({ handleClose }) {
   )
 }
 
-AddTxForm.propTypes = {
-  handleClose: func
+EditTxForm.propTypes = {
+  handleClose: func,
+  transaction: object
 }
 
 const formStyle = css`

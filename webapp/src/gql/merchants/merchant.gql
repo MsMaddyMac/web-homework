@@ -1,0 +1,10 @@
+query GetMerchant($id: String) {
+  merchant(id: $id) {
+    id
+    name
+    transactions{
+      id
+      amount
+    }
+  }
+}

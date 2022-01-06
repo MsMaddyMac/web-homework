@@ -8,7 +8,7 @@ import { Spinner } from '../components/global/Spinner'
 import { PageLayout } from '../components/global/PageLayout'
 import { css } from '@emotion/core'
 
-export function Tx () {
+export function Txs () {
   const { loading, error, data = {} } = useQuery(GetTransactions)
 
   if (loading) {

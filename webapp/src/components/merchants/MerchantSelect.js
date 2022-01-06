@@ -1,8 +1,8 @@
 import React from 'react'
 import { func } from 'prop-types'
 import { useQuery } from '@apollo/client'
-import GetMerchants from '../gql/merchants/merchants.gql'
-import { Select } from '../components/global/Select'
+import GetMerchants from '../../gql/merchants/merchants.gql'
+import { Select } from '../global/Select'
 
 export function MerchantSelect ({ onChange }) {
   const { data: { merchants } = {} } = useQuery(GetMerchants)

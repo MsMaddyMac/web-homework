@@ -1,1 +1,2 @@
-export { Tx } from './tx-page'
+export { Txs } from './txs-page'
+export { TxDetails } from './tx-details-page'

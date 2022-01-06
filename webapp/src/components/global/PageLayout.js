@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, element, array } from 'prop-types'
+import { string, element, object } from 'prop-types'
 import { css } from '@emotion/core'
 
 export function PageLayout ({ title, pageBtn, children }) {
@@ -19,7 +19,7 @@ export function PageLayout ({ title, pageBtn, children }) {
 PageLayout.propTypes = {
   title: string,
   pageBtn: element,
-  children: array
+  children: object
 }
 
 const pageStyle = css`

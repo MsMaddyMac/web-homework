@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { arrayOf, string, bool, number, shape } from 'prop-types'
 import { css } from '@emotion/core'
+import { formatBoolToTxt } from '../../helpers/format'
 
 const styles = css`
  .header {
@@ -31,7 +33,6 @@ const styles = css`
 
 const makeDataTestId = (transactionId, fieldName) => `transaction-${transactionId}-${fieldName}`
 
-const formatBoolToTxt = (boolean) => boolean === true ? 'True' : 'False'
 export function TxTable ({ data }) {
   return (
     <table css={styles}>
@@ -50,7 +51,7 @@ export function TxTable ({ data }) {
             const { id, user_id: userId, description, merchant_id: merchantId, debit, credit, amount } = tx
             return (
               <tr data-testid={`transaction-${id}`} key={`transaction-${id}`}>
-                <td data-testid={makeDataTestId(id, 'id')}>{id}</td>
+                <td data-testid={makeDataTestId(id, 'id')}><Link to={`/transactions/${id}`}>{id}</Link></td>
                 <td data-testid={makeDataTestId(id, 'userId')}>{userId}</td>
                 <td data-testid={makeDataTestId(id, 'description')}>{description}</td>
                 <td data-testid={makeDataTestId(id, 'merchant')}>{merchantId}</td>
