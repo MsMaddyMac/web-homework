@@ -36,12 +36,12 @@ export function TxDetails () {
       <div css={txContainerStyle}>
         <Card size='m'>
           <div css={cardContentStyle}>
-            <div>Description: {transaction.description}</div>
-            <div>MerchId: {transaction.merchant_id}</div>
-            <div>UserId: {transaction.user_id}</div>
-            <div>Credit: {formatBoolToTxt(transaction.credit)}</div>
-            <div>Debit: {formatBoolToTxt(transaction.debit)}</div>
-            <div>Amount: {`$${transaction.amount}`}</div>
+            <div css={infoStyle}><p css={mr}>Description: </p> <p>{transaction.description}</p></div>
+            <div css={infoStyle}><p css={mr}>MerchId: </p> <p>{transaction.merchant_id}</p></div>
+            <div css={infoStyle}><p css={mr}>UserId: </p> <p>{transaction.user_id}</p></div>
+            <div css={infoStyle}><p css={mr}>Credit: </p> <p>{formatBoolToTxt(transaction.credit)}</p></div>
+            <div css={infoStyle}><p css={mr}>Debit: </p> <p>{formatBoolToTxt(transaction.debit)}</p></div>
+            <div css={infoStyle}><p css={mr}>Amount: </p> <p>{`$${transaction.amount}`}</p></div>
             <div css={btnContainerStyle}>
               <EditTxBtn transaction={transaction} />
               <DeleteTxBtn id={id} />
@@ -68,5 +68,21 @@ const cardContentStyle = css`
 
 const btnContainerStyle = css`
   display: flex;
-  justify-content: space-between;
+  margin-top: 8px;
+`
+
+const infoStyle = css`
+  display: flex;
+  &:nth-of-type(odd) {
+    margin-right: 3px;
+  }
+  p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+`
+
+const mr = css`
+  margin-right: 5px;
+  font-weight: bold;
 `
