@@ -1,30 +1,37 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { PageLayout } from '../components/global/PageLayout'
 import { useQuery } from '@apollo/client'
-import GetTransactions from '../gql/transactions.gql'
-import { TxTable } from '../components/transactions/TxTable'
+import GetTransactions from '../gql/transactions/transactions.gql'
+import GetUsers from '../gql/users/users.gql'
+import GetMerchants from '../gql/merchants/merchants.gql'
+import { Error } from '../components/global/Error'
+import { Spinner } from '../components/global/Spinner'
+import { DashDisplay } from '../components/global/DashDisplay'
 
 export function Home () {
-  const { loading, error, data = {} } = useQuery(GetTransactions)
+  const { data: { users } = {}, loading: usersLoading, error: usersError } = useQuery(GetUsers)
+  const { data: { merchants } = {}, loading: merchantsLoading, error: merchantsError } = useQuery(GetMerchants)
+  const { data: { transactions } = {}, loading: transactionsLoading, error: transactionsError } = useQuery(GetTransactions)
 
-  if (loading) {
+  if (usersLoading || merchantsLoading || transactionsLoading) {
     return (
-      <Fragment>
-        Loading...
-      </Fragment>
+      <Spinner />
     )
   }
 
-  if (error) {
+  if (usersError || merchantsError || transactionsError) {
     return (
-      <Fragment>
-        ¯\_(ツ)_/¯
-      </Fragment>
+      <Error />
     )
   }
 
   return (
-    <Fragment>
-      <TxTable data={data.transactions} />
-    </Fragment>
+    <PageLayout title='Dashboard'>
+      <DashDisplay
+        merchCount={merchants?.length}
+        txCount={transactions?.length}
+        userCount={users?.length}
+      />
+    </PageLayout>
   )
 }

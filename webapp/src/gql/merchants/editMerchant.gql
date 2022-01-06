@@ -1,0 +1,6 @@
+mutation EditMerchant($id: String!, $name: String) {
+  updateMerchant(id: $id, name: $name) {
+    id
+    name
+  }
+}

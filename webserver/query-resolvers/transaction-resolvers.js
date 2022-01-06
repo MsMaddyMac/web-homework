@@ -18,7 +18,23 @@ async function findOne (id) {
   return packageModel(transaction)[0] || null
 }
 
+async function findAndDelete (id) {
+  const query = TransactionModel.findByIdAndDelete(id)
+  const transaction = await query.exec()
+
+  return packageModel(transaction)[0] || null
+}
+
+async function findAndUpdate (args) {
+  const query = TransactionModel.findByIdAndUpdate(args.id, args, { new: true })
+  const transaction = await query.exec()
+
+  return packageModel(transaction)[0] || null
+}
+
 module.exports = {
   find,
-  findOne
+  findOne,
+  findAndDelete,
+  findAndUpdate
 }
