@@ -6,7 +6,7 @@ const { seedTransactions } = require('../mocks/transactions-data')
 const { seedUsers } = require('../mocks/users-data')
 const { seedMerchants } = require('../mocks/merchants-data')
 
-const MONGO_URI = 'mongodb+srv://divvyuser:QIRYMJUaLmy6cxdL@cluster0.krkj8.mongodb.net/cluster0?retryWrites=true&w=majority'
+const MONGO_URI = 'mongodb://localhost:27017/graphql'
 
 mongoose.Promise = global.Promise
 mongoose.connect(MONGO_URI, {
