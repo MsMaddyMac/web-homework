@@ -19,10 +19,14 @@ const convertToRoman = (num) => {
   ]
   let result = []
 
+  // finds element in given array that is less than or equal to
+  // the number passed into convertToRoman func
+  // this is so the roman numeral character is never quadrupled ex: 'XXXX'
   const findElement = e => {
     return e <= num
   }
 
+  //  doesn't account for any number greater than 3,999
   while (num > 0) {
     let nextHighest = numberArr.find(findElement)
 
